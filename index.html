@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ohayo, Ishu 🌸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-1: #fdf1e4;
+    --sky-2: #f6dbe4;
+    --sky-3: #e6dbf1;
+    --plum: #5c4267;
+    --plum-soft: #8a6e93;
+    --gold: #e3a24a;
+    --petal: #fffdf9;
+    --petal-tip: #f4c9d6;
+    --leaf: #7c9473;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html{
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+  }
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    min-height:100%;
+    font-family:'Karla', sans-serif;
+    color: var(--plum);
+    background: linear-gradient(180deg, var(--sky-1) 0%, var(--sky-2) 45%, var(--sky-3) 100%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* soft rising sun glow, one-time */
+  .sunrise{
+    position: fixed;
+    left: 50%;
+    top: 18%;
+    width: 520px;
+    height: 520px;
+    transform: translate(-50%,-50%);
+    background: radial-gradient(circle, rgba(255,214,153,0.55) 0%, rgba(255,214,153,0.0) 70%);
+    border-radius: 50%;
+    opacity: 0;
+    animation: glow 3.5s ease-out 0.2s forwards;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes glow{
+    0%{ opacity:0; transform: translate(-50%,-30%) scale(0.7); }
+    100%{ opacity:1; transform: translate(-50%,-50%) scale(1); }
+  }
+
+  .wrap{
+    position: relative;
+    z-index: 1;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 48px 24px 90px;
+    text-align: center;
+  }
+
+  .eyebrow{
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    color: var(--plum-soft);
+    opacity: 0;
+    animation: fadeIn 1s ease-out 3.4s forwards;
+  }
+
+  .lily-stage{
+    width: min(78vw, 340px);
+    margin: 8px auto 6px;
+  }
+
+  .lily-stage svg{ width:100%; height:auto; overflow: visible; }
+
+  /* petal bloom: scale up from base, staggered */
+  .petal{
+    transform-origin: 160px 300px;
+    transform: scaleY(0.12) scaleX(0.5);
+    opacity: 0;
+    animation: bloom 1.6s cubic-bezier(.25,.9,.3,1) forwards;
+  }
+  .petal1{ animation-delay: .3s; }
+  .petal2{ animation-delay: .48s; }
+  .petal3{ animation-delay: .66s; }
+  .petal4{ animation-delay: .48s; }
+  .petal5{ animation-delay: .66s; }
+  .petal6{ animation-delay: .84s; }
+
+  @keyframes bloom{
+    0%{ transform: scaleY(0.12) scaleX(0.5); opacity: 0; }
+    55%{ opacity: 1; }
+    100%{ transform: scaleY(1) scaleX(1); opacity: 1; }
+  }
+
+  .stamen{
+    opacity: 0;
+    animation: fadeIn 0.9s ease-out 1.5s forwards;
+  }
+
+  .stem, .leaf{
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.05s forwards;
+  }
+
+  .dew{
+    opacity: 0;
+    animation: dewIn 1.4s ease-out forwards;
+  }
+  .dew1{ animation-delay: 1.9s; }
+  .dew2{ animation-delay: 2.15s; }
+  .dew3{ animation-delay: 2.4s; }
+  @keyframes dewIn{
+    0%{ opacity: 0; transform: translateY(-4px) scale(0.4); }
+    60%{ opacity: 1; }
+    100%{ opacity: 0.9; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes fadeIn{
+    from{ opacity: 0; }
+    to{ opacity: 1; }
+  }
+
+  h1{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(2rem, 7vw, 2.8rem);
+    line-height: 1.15;
+    margin: 18px 0 6px;
+    opacity: 0;
+    animation: riseIn 1s ease-out 2.9s forwards;
+  }
+  h1 em{
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .sub{
+    font-size: 1.02rem;
+    color: var(--plum-soft);
+    margin: 0 0 34px;
+    opacity: 0;
+    animation: riseIn 1s ease-out 3.15s forwards;
+  }
+
+  @keyframes riseIn{
+    from{ opacity: 0; transform: translateY(10px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  .divider{
+    width: 1px;
+    height: 34px;
+    background: linear-gradient(var(--leaf), transparent);
+    margin: 0 auto 34px;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 3.5s forwards;
+  }
+
+  .letter{
+    text-align: left;
+    font-size: 1.08rem;
+    line-height: 1.85;
+    font-weight: 300;
+  }
+
+  .letter p{
+    margin: 0 0 22px;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: lineIn 0.9s ease-out forwards;
+  }
+
+  @keyframes lineIn{
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  .l1{ animation-delay: 3.7s; }
+  .l2{ animation-delay: 4.05s; }
+  .l3{ animation-delay: 4.4s; }
+  .l4{ animation-delay: 4.75s; }
+  .l5{ animation-delay: 5.1s; }
+  .l6{ animation-delay: 5.45s; }
+
+  .letter strong{
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .signoff{
+    margin-top: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--plum);
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out 5.9s forwards;
+    text-align: center;
+  }
+
+  .signoff span{
+    display: block;
+    font-family: 'Karla', sans-serif;
+    font-style: normal;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--plum-soft);
+    margin-top: 6px;
+  }
+
+  .footer-flowers{
+    margin-top: 46px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out 6.2s forwards;
+    font-size: 1.1rem;
+    color: var(--petal-tip);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; animation-delay: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sunrise"></div>
+
+<div class="wrap">
+  <div class="eyebrow">for Ishu, this morning</div>
+
+  <div class="lily-stage">
+    <svg viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg">
+      <!-- stem -->
+      <path class="stem" d="M160 380 C160 320 150 300 160 260 C170 230 160 210 160 195"
+            stroke="var(--leaf)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- leaves -->
+      <path class="leaf" d="M160 320 C120 315 95 335 80 365 C120 368 150 350 160 320 Z" fill="var(--leaf)" opacity="0.85"/>
+      <path class="leaf" d="M160 280 C200 272 222 288 235 312 C198 320 170 306 160 280 Z" fill="var(--leaf)" opacity="0.75"/>
+
+      <!-- petals: 6 petals fanning from base point (160,300) up to bloom around (160,190) -->
+      <g>
+        <path class="petal petal1" d="M160 300 C130 250 120 190 160 150 C200 190 190 250 160 300 Z" fill="var(--petal)" stroke="var(--petal-tip)" stroke-width="1.5"/>
+        <path class="petal petal2" d="M160 300 C110 265 78 210 100 155 C155 175 175 240 160 300 Z" fill="var(--petal)" stroke="var(--petal-tip)" stroke-width="1.5" transform="rotate(-8 160 300)"/>
+        <path class="petal petal3" d="M160 300 C95 285 55 245 60 185 C120 185 165 235 160 300 Z" fill="var(--petal)" stroke="var(--petal-tip)" stroke-width="1.5" transform="rotate(-18 160 300)"/>
+        <path class="petal petal4" d="M160 300 C210 265 242 210 220 155 C165 175 145 240 160 300 Z" fill="var(--petal)" stroke="var(--petal-tip)" stroke-width="1.5" transform="rotate(8 160 300)"/>
+        <path class="petal petal5" d="M160 300 C225 285 265 245 260 185 C200 185 155 235 160 300 Z" fill="var(--petal)" stroke="var(--petal-tip)" stroke-width="1.5" transform="rotate(18 160 300)"/>
+        <path class="petal petal6" d="M160 300 C150 240 155 180 160 145 C165 180 170 240 160 300 Z" fill="var(--petal)" stroke="var(--petal-tip)" stroke-width="1.5" transform="rotate(28 160 300)"/>
+      </g>
+
+      <!-- stamens -->
+      <g class="stamen">
+        <line x1="160" y1="270" x2="145" y2="220" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="160" y1="270" x2="160" y2="212" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="160" y1="270" x2="176" y2="220" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="145" cy="216" r="4" fill="var(--gold)"/>
+        <circle cx="160" cy="208" r="4.5" fill="var(--gold)"/>
+        <circle cx="176" cy="216" r="4" fill="var(--gold)"/>
+      </g>
+
+      <!-- dew drops on petals -->
+      <ellipse class="dew dew1" cx="115" cy="230" rx="3" ry="4.5" fill="#ffffff" opacity="0.9"/>
+      <ellipse class="dew dew2" cx="200" cy="210" rx="2.5" ry="4" fill="#ffffff" opacity="0.9"/>
+      <ellipse class="dew dew3" cx="160" cy="180" rx="2.5" ry="4" fill="#ffffff" opacity="0.9"/>
+    </svg>
+  </div>
+
+  <h1>Ohayo, Ishu <em>saan</em> 🌸</h1>
+  <p class="sub">have a nice day, always.</p>
+
+  <div class="divider"></div>
+
+  <div class="letter">
+    <p class="l1">I know what you're dealing with right now. I'm not going to pretend I don't. But whatever it is, I just want you to know — <strong>I want you to be happy</strong>. That matters more to me than anything else today.</p>
+
+    <p class="l2">You're special to me, Ishu. Not in some small, ordinary way — in the way that stays, quietly, no matter what's happening between us.</p>
+
+    <p class="l3">And remember, you can do anything. Today's interview, for the project — you're going to ace it. Walk in like you already know that, because I do.</p>
+
+    <p class="l4">Don't think about me while you're doing it. Give your career the first priority, not me — I won't mind that, I promise. I <em>want</em> you to grow, to improve, to achieve more and more. I don't want you stuck anywhere because of me or my thoughts.</p>
+
+    <p class="l5">So today, don't think about me. Think about yourself. Think about your career. Just go be brilliant.</p>
+
+    <p class="l6">I'm fine. Really. Go ace it. 🌷</p>
+  </div>
+
+  <div class="signoff">
+    with all the quiet hoping in the world
+    <span>GOOD LUCK TODAY, ISHU</span>
+  </div>
+
+  <div class="footer-flowers">🌸 · 🌷 · 🌼</div>
+</div>
+
+</body>
+</html>
